@@ -4,32 +4,47 @@ import java.util.Queue;
 
 public class CentralizedQueuingSystem
 {
-    private Queue<Integer> Queue = new LinkedList<>();
+    
+    private static CentralizedQueuingSystem instance;
+    private Queue<Integer> queue = new LinkedList<>();
     private int[] helpDeskStations = new int[3];
 
-    public synchronized void addEnqueue()
+    
+    public static synchronized CentralizedQueuingSystem getInstance()
     {
-        int qNumber = Queue.size() + 1;
-        Queue.add(qNumber);
+        if(instance == null)
+            instance = new CentralizedQueuingSystem();
+        return instance;
+    }
+
+    
+    public synchronized void addQueue()
+    {
+        int qNumber = queue.size() + 1;
+        queue.add(qNumber);
         System.out.println("\nA person has entered and has been assigned a Queue Number of " + qNumber);
     }
+
+    
     public synchronized void displayQueue()
     {
         System.out.println("\n...Queue...");
 
-        if (Queue.isEmpty())
+        if (queue.isEmpty())
         {
-            System.out.println(Queue + "is empty.");
+            System.out.println(queue + "is empty.");
         }
         else
         {
-            System.out.println(Queue);
+            System.out.println(queue);
         }
     }
+
+    
     public synchronized void helpDesk(int helpDeskStationNumber)
     {
-        int qN = Queue.poll();
-        if (!Queue.isEmpty())
+        int qN = queue.poll();
+        if (!queue.isEmpty())
         {
             helpDeskStations[helpDeskStationNumber - 1] = qN;
             System.out.println("\nHelp Desk Station " + helpDeskStationNumber);
@@ -42,13 +57,15 @@ public class CentralizedQueuingSystem
         }
 
     }
+
+    
     public synchronized void resetQueue(int newQueueNumber)
     {
-        Queue.clear();
+        queue.clear();
         for (int a = 1; a <= newQueueNumber; a++)
         {
-            Queue.add(a);
+            queue.add(a);
         }
-        System.out.println("\nThe queue number has been reset to " + Queue);
+        System.out.println("\nThe queue number has been reset to " + queue);
     }
 }
