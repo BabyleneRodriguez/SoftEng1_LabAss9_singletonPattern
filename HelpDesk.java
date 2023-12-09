@@ -1,11 +1,12 @@
 package SoftEng1_LabAss9_singletonPattern;
-
 import java.util.Scanner;
 
 public class HelpDesk
 {
+    
     public static void main(String args[])
     {
+        
             System.out.println("SOFTWARE ENGINEERING 1");
             System.out.print("LABORATORY ASSIGNMENT 9 - SINGLETON PATTERN\n");
             System.out.print("RODRIGUEZ, BABYLENE G.\n");
@@ -13,7 +14,7 @@ public class HelpDesk
             System.out.println();
 
 
-            CentralizedQueuingSystem monitoringQueuingSystem = new CentralizedQueuingSystem();
+            CentralizedQueuingSystem monitoringQueuingSystem = CentralizedQueuingSystem.getInstance();
 
 
             System.out.println("\nPAG-IBIG OFFICE CENTRALIZED QUEUING SYSTEM\n");
@@ -35,7 +36,7 @@ public class HelpDesk
               switch (option)
               {
                   case 1:
-                      monitoringQueuingSystem.addEnqueue();
+                      monitoringQueuingSystem.addQueue();
                       monitoringQueuingSystem.displayQueue();
                       break;
 
